@@ -3,35 +3,41 @@ package graphs;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 public class WeightedGraph {
 
-    private Map<Node, List<Edge>> vertices;
+    private Map<Path, List<PathEdge>> vertices;
 
-    public WeightedGraph(Map<Node, List<Edge>> adjVertices) {
+    public WeightedGraph(Map<Path, List<PathEdge>> adjVertices) {
         this.vertices = adjVertices;
     }
 
-    public void addNode(Node node1) {
-        vertices.putIfAbsent(node1, new ArrayList<>());
+    public void addPath(Path path, PathEdge pe) {
+        if(!vertices.containsKey(path)) {
+            List newList = new ArrayList();
+            newList.add(pe);
+            vertices.putIfAbsent(path, newList);
+        } else {
+            List currentList = vertices.get(path);
+            currentList.add(pe);
+        }
     }
 
-    public void addEdge(Node v, Node w, double weight) {
-        Edge edge = new Edge(v, w, weight);
-        vertices.get(v).add(edge);
+    public Map<Path, List<PathEdge>> getVertices() {
+        return vertices;
     }
 
-    public void addUndirectedEdge(Node v, Node w, double weight) {
-        addEdge(v, w, weight);
-        addEdge(w, v, weight);
+    public void setVertices(Map<Path, List<PathEdge>> vertices) {
+        this.vertices = vertices;
     }
 
     public int getV() {
         return vertices.size();
     }
 
-    public Iterable<Edge> adjacents(int v) {
-        return vertices.get(v);
+    public List<PathEdge> adjacents(Path path) {
+        return vertices.get(path);
     }
 
 }
