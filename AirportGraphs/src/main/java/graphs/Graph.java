@@ -29,35 +29,16 @@ public class Graph {
         adjVertices.putIfAbsent(node1, new ArrayList<>());
     }
 
-    public void removeNode(String label) {
-        Node v = new Node(label);
-        adjVertices.values().stream().forEach(e -> e.remove(v));
-        adjVertices.remove(new Node(label));
-    }
-
     public void addEdge(Node node1, Node node2) {
         adjVertices.get(node1).add(node2);
         adjVertices.get(node2).add(node1);
-    }
-
-    public void removeEdge(String label1, String label2) {
-        Node v1 = new Node(label1);
-        Node v2 = new Node(label2);
-        List<Node> eV1 = adjVertices.get(v1);
-        List<Node> eV2 = adjVertices.get(v2);
-        if (eV1 != null) {
-            eV1.remove(v2);
-        }
-        if (eV2 != null) {
-            eV2.remove(v1);
-        }
     }
 
     public List<Node> getAdjVertices(Node node) {
         return adjVertices.get(node);
     }
 
-    public boolean breadthFirstSearch(Node rootNode, Node nodeDest) {
+    public Set<Node> breadthFirstSearch(Node rootNode, Node nodeDest) {
         Set<Node> visited = new LinkedHashSet<Node>();
         Queue<Node> queue = new LinkedList<Node>();
         queue.add(rootNode);
@@ -72,17 +53,16 @@ public class Graph {
 
                     if (v.label.equals(nodeDest.label)) {
                         visited.add(nodeDest);
-                        for (Node node : visited) {
-                            System.out.print(" -->" + node.label + "(" + node.company + ")");
-                        }
-                        System.out.println("");
-                        return true;
+                        /*for (Node node : visited) {
+                            System.out.print(node.label + "(" + node.company + ") -> ");
+                        }*/
+                        return visited;
                     }
                     queue.add(v);
                 }
             }
         }
-        return false;
+        return visited;
     }
 
     public Set<Node> depthFirstTraversal(Node rootNode, Node nodeDest) {

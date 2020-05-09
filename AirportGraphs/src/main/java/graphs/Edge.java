@@ -1,40 +1,34 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package graphs;
 
+/**
+ *
+ * @author Mikkel
+ */
 public class Edge {
 
-    public Node from;
-    public Node to;
-    double weight = 0;
+    public String destination;
+    public String source;
+    public String airline;
+    public Double distance;
+    public Double time;
+    public Edge next;
 
-    public Edge(Node from, Node to, double weight) {
-        this.from = from;
-        this.to = to;
-        this.weight = weight;
-
+    public Edge(String destination, String source, String airline, Double distance, Double time, Edge next) {
+        this.destination = destination;
+        this.source = source;
+        this.airline = airline;
+        this.distance = distance;
+        this.time = time;
+        this.next = next;
     }
 
-    public Node getFrom() {
-        return from;
+    @Override
+    public String toString() {
+        return this.destination + "; " + this.airline + "; " + this.next;
     }
-
-    public void setFrom(Node from) {
-        this.from = from;
-    }
-
-    public Node getTo() {
-        return to;
-    }
-
-    public void setTo(Node to) {
-        this.to = to;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
 }

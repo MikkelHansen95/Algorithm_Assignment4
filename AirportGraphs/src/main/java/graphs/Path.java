@@ -6,35 +6,41 @@ import java.util.Objects;
 
 public class Path {
 
-    public String label;
-    public String company;
+    public String from;
+    public String to;
+    public double weight;
 
-    public Path(String label, String company) {
-        this.label = label;
-        this.company = company;
+    public Path(String from, String to, double weight) {
+        this.from = from;
+        this.to = to;
+        this.weight = weight;
     }
 
-    public String getLabel() {
-        return label;
+    public double getWeight() {
+        return weight;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public String getFrom() {
+        return from;
     }
 
-    public String getCompany() {
-        return company;
+    public void setFrom(String from) {
+        this.from = from;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
     }
 
     // equals and hashCode
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 43 * hash + Objects.hashCode(this.label);
+        hash = 43 * hash + Objects.hashCode(this.from);
         return hash;
     }
 
@@ -50,7 +56,7 @@ public class Path {
             return false;
         }
         final Node other = (Node) obj;
-        if (!Objects.equals(this.label, other.label)) {
+        if (!Objects.equals(this.from, other.label)) {
             return false;
         }
         return true;

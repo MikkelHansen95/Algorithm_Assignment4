@@ -5,6 +5,7 @@
  */
 package graphs;
 
+import java.util.LinkedList;
 import java.util.Objects;
 
 /**
@@ -15,24 +16,15 @@ public class Node {
 
     public String label;
     public String company;
-    double weight = 0;
-
-    public Node(String label) {
-        this.label = label;
-        this.company = "";
-    }
+    double weight = 0.0;
+    LinkedList<Node> shortestPath = new LinkedList();
 
     public Node(String label, String company) {
         this.label = label;
         this.company = company;
+        this.weight = Double.MAX_VALUE;
     }
-    
-    public Node(String label, String company, double weight){
-        this.label = label;
-        this.company = company;
-        this.weight = weight;
-    }
-    
+
     // equals and hashCode
     @Override
     public int hashCode() {
@@ -59,5 +51,53 @@ public class Node {
         return true;
     }
 
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public LinkedList<Node> getShortestPath() {
+        return this.shortestPath;
+    }
+
+    public void setShortestPath(LinkedList<Node> sp) {
+        this.shortestPath = sp;
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" + "label=" + label + ", company=" + company + ", weight=" + weight + ", shortestPath=" + shortestPath + '}';
+    }
+
+    public String toStringLabel() {
+        return "" + label + ", ";
+    }
+
+    public String toStringForShortestPath() {
+        String str = "";
+        for (Node node : shortestPath) {
+            str += toStringLabel();
+        }
+        return str + " size : " + shortestPath.size() + " ";
+    }
 
 }
