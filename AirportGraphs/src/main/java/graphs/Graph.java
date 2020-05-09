@@ -53,9 +53,6 @@ public class Graph {
 
                     if (v.label.equals(nodeDest.label)) {
                         visited.add(nodeDest);
-                        /*for (Node node : visited) {
-                            System.out.print(node.label + "(" + node.company + ") -> ");
-                        }*/
                         return visited;
                     }
                     queue.add(v);

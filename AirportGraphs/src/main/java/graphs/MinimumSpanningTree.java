@@ -48,7 +48,7 @@ public class MinimumSpanningTree {
 
             String x_set = find(parent, edge.source);
             String y_set = find(parent, edge.destination);
-            if (x_set == y_set) {
+            if (x_set.equals(y_set)) {
             } else {
                 mst.add(edge);
                 index++;

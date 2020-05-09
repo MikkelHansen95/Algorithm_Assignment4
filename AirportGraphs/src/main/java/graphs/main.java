@@ -85,8 +85,8 @@ public class main {
             
             MinimumSpanningTree minimumSTree = new MinimumSpanningTree(wg);
 
-            for (Map.Entry<String, Edge> entry : wg.getVertices().entrySet()) {
-                Edge node = entry.getValue();
+            for (Map.Entry<String, Edge> edge : wg.getVertices().entrySet()) {
+                Edge node = edge.getValue();
                 minimumSTree.addEgde(node.source, node.destination, node.distance);
             }
             minimumSTree.minimumSpanningTreeKruskal();
