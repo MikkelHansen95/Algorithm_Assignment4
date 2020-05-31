@@ -45,7 +45,7 @@ public class main {
                 g.addNode(node);
                 g.addNode(nodeDest);
                 g.addEdge(node, nodeDest);
-
+                // addEdge only need source Airport, but for clarity we make an almost empty edge
                 wg.addEdge(new Edge("", source, "", 0.0, 0.0, null), new Edge(destination, source, airline, distance, time, null));
 
                 line = reader.readLine();
@@ -63,7 +63,7 @@ public class main {
             System.out.println("--------------------");
 
             System.out.println("DEPTH FIRST SEARCH: " + node1.label + " -> " + node2.label);
-            Set<Node> res = g.depthFirstTraversal(node1, node2);
+            Set<Node> res = g.depthFirstSearch(node1, node2);
             res.forEach((t) -> {
                 System.out.print(t.label + "(" + t.company + ") --> ");
 

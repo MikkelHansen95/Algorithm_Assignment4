@@ -1,7 +1,6 @@
 package graphs;
 
 /**
- *
  * @author Mikkel
  */
 public class Edge {
@@ -21,6 +20,13 @@ public class Edge {
         this.time = time;
         this.next = next;
     }
+
+    public Edge(String destination, String source, Double distance) {
+        this.destination = destination;
+        this.source = source;
+        this.distance = distance;
+    }
+    
 
     @Override
     public String toString() {

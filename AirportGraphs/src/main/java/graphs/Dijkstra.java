@@ -1,77 +1,54 @@
 package graphs;
 
+import basics.myPath;
+import java.util.PriorityQueue;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.PriorityQueue;
-import javax.validation.constraints.NotNull;
+
 
 /**
- *
  * @author Mikkel
  */
 public class Dijkstra {
 
     public WeightedGraph wg;
     private String source;
+    // Create map with AIRPORT SOURCE AND TARGET
     private Map<String, String> edgeTo;
+    // Create map with AIRPORT TARGER AND WEIGHT
     private Map<String, Double> distTo;
-    private PriorityQueue<Path> pqMin = new PriorityQueue<>();
+    // PriorityQueue
+    private PriorityQueue<myPath> pqMin = new PriorityQueue<>();
 
     public Dijkstra(WeightedGraph graph, String source, String type) {
-
         this.wg = graph;
         this.source = source;
+        // Get all AIRPORTS
         ArrayList<String> keys = new ArrayList<>(wg.getVertices().keySet());
         edgeTo = new HashMap<>();
         distTo = new HashMap<>();
         for (String v : keys) {
-            edgeTo.put(source, "");
+            // destination as KEY and source as VALUE
+            edgeTo.put(v, "");
+            // destination as KEY and WEIGHT as VALUE
             distTo.put(v, Double.POSITIVE_INFINITY);
         }
         edgeTo.put(source, source);
         distTo.put(source, 0.0);
-        pqMin.add(new Path(source, 0.0));
+        pqMin.add(new myPath(source, 0.0));
         build(type);
-    }
-
-    private class Path implements Comparable<Path> {
-
-        String v;
-        double weight;
-
-        Path(String v, double weight) {
-            this.v = v;
-            this.weight = weight;
-        }
-
-        @Override
-        public int compareTo(@NotNull Path other) {
-            if (this.weight < other.weight) {
-                return -1;
-            }
-            if (this.weight > other.weight) {
-                return 1;
-            }
-            return 0;
-        }
-
-        @Override
-        public String toString() {
-            return "" + v + ": " + weight;
-        }
-
     }
 
     private void build(String weightType) {
         while (!pqMin.isEmpty()) {
-            Path path = pqMin.poll();
+            myPath path = pqMin.poll();
             relax(path, weightType);
         }
     }
 
-    private void relax(Path path, String type) {
+    private void relax(myPath path, String type) {
         Iterable<Edge> adj = wg.adjacents(new Edge("", path.v, "", Double.NaN, Double.NaN, null));
         for (Edge edge : adj) {
             double weightValue = 0.0;
@@ -87,7 +64,7 @@ public class Dijkstra {
                     distTo.put(edge.destination, weightValue);
                     edgeTo.put(edge.destination, edge.source);
                     // update priority queue
-                    pqMin.add(new Path(edge.destination, weightValue));
+                    pqMin.add(new myPath(edge.destination, weightValue));
                 }
             }
         }

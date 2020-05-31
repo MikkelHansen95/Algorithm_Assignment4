@@ -27,7 +27,7 @@ public class MinimumSpanningTree {
     }
 
     public void addEgde(String source, String destination, Double weight) {
-        Edge edge = new Edge(destination, source, "", weight, weight, null);
+        Edge edge = new Edge(destination, source, weight);
         allEdges.add(edge);
     }
 
@@ -44,7 +44,7 @@ public class MinimumSpanningTree {
 
         int index = 0;
         while (!pq.isEmpty() && index < vertices.length - 1) {
-            Edge edge = pq.remove();
+            Edge edge = pq.poll();
 
             String x_set = find(parent, edge.source);
             String y_set = find(parent, edge.destination);
@@ -55,13 +55,16 @@ public class MinimumSpanningTree {
                 union(parent, x_set, y_set);
             }
         }
+        
         print(mst);
     }
+    
     public void makeSet(Map<String, String> parent) {
         for (int i = 0; i < vertices.length; i++) {
             parent.put(vertices[i], vertices[i]);
         }
     }
+    
     public String find(Map<String, String> parent, String vertex) {
 
         if (parent.get(vertex) != null && !parent.get(vertex).equals(vertex)) {
@@ -69,15 +72,18 @@ public class MinimumSpanningTree {
         };
         return vertex;
     }
+    
     public void union(Map<String, String> parent, String x, String y) {
         String x_set_parent = find(parent, x);
         String y_set_parent = find(parent, y);
         parent.put(y_set_parent, x_set_parent);
     }
+    
     public void print(ArrayList<Edge> edgeList) {
-        for (int i = 0; i < edgeList.size(); i++) {
+        /*for (int i = 0; i < edgeList.size(); i++) {
             Edge edge = edgeList.get(i);
             System.out.println("Edge number: " + i + " | source: " + edge.source + " target: " + edge.destination + " weight: " + edge.distance);
-        }
+        }*/
+        System.out.println(edgeList.size());
     }
 }
