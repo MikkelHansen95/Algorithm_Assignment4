@@ -75,7 +75,6 @@ public class Dijkstra {
         Double weight = distTo.get(destination);
         while (edgeTo.get(destination) != null && !edgeTo.get(destination).equals("") && !edgeTo.get(destination).equals(destination)) {
             destination = edgeTo.get(destination);
-            weight += distTo.get(destination);
             path = "" + destination + " -> " + path;
         }
         return path + " " + type+ ": " + weight;

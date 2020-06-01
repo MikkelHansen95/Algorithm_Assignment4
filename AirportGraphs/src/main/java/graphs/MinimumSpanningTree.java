@@ -48,6 +48,7 @@ public class MinimumSpanningTree {
 
             String x_set = find(parent, edge.source);
             String y_set = find(parent, edge.destination);
+            
             if (x_set.equals(y_set)) {
             } else {
                 mst.add(edge);
@@ -80,10 +81,12 @@ public class MinimumSpanningTree {
     }
     
     public void print(ArrayList<Edge> edgeList) {
-        /*for (int i = 0; i < edgeList.size(); i++) {
+        Double weight = 0.0;
+        for (int i = 0; i < edgeList.size(); i++) {
             Edge edge = edgeList.get(i);
-            System.out.println("Edge number: " + i + " | source: " + edge.source + " target: " + edge.destination + " weight: " + edge.distance);
-        }*/
-        System.out.println(edgeList.size());
+            weight += edge.distance;
+            //System.out.println("Edge number: " + i + " | source: " + edge.source + " target: " + edge.destination + " weight: " + edge.distance);
+        }
+        System.out.println(edgeList.size() + " | " + weight);
     }
 }
